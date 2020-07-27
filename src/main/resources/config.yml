@@ -1,0 +1,11 @@
+PlayerLevels:
+Levels:
+  1:
+    xp: 500
+    item: stone
+    amount: 15
+  2:
+    xp: 1000
+    item: stone
+    amount: 15
+

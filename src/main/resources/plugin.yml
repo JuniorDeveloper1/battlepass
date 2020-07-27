@@ -1,0 +1,12 @@
+name: Battlepass
+author: JuniorDeveloper
+version: ${version}
+main: me.JuniorDeveloper.battlepass.battlepassMain
+description: PeyVeyPey
+
+
+commands:
+  bp:
+    description: Check your battlepass level!
+    usage: /<command> [level|challanges|check] [level]
+    aliases: [battlepass, BattlePass]
