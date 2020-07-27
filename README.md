@@ -1,8 +1,6 @@
 #Battlepass Plugin
 Author : JuniorDeveloper.
 
-
-
 ##Commands
 * **/bp level :** 
  
@@ -15,9 +13,8 @@ Author : JuniorDeveloper.
 *  **bp check <player> :** 
   
  **Description :** Checks an player level!
-  
 *   **bp xp list :**
-   
+  
  **Description:** Shows every level up. With xp and Level! **For example :** Level 1 1000XP!
 
 #Important infromation!
