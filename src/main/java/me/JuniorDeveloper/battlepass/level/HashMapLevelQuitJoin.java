@@ -10,7 +10,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class HashMapLevelQuitJoin implements Listener {
 
 
-    //TODO: Player Join error : Line Unknown
     @EventHandler
     public void join(PlayerJoinEvent event) {
         Player player = event.getPlayer();
@@ -33,7 +32,7 @@ public class HashMapLevelQuitJoin implements Listener {
         }
     }
 
-    //TODO: Player quit error : Line Unknown
+
     @EventHandler
     public void quit(PlayerQuitEvent event) {
         Player player = event.getPlayer();

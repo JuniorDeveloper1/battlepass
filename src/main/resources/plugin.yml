@@ -8,5 +8,5 @@ description: PeyVeyPey
 commands:
   bp:
     description: Check your battlepass level!
-    usage: /<command> [level|challanges|check] [level]
+    usage: /<command> [level|challanges|check|xp] [level|list] [2|3|4|5]
     aliases: [battlepass, BattlePass]
