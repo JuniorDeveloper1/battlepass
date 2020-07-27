@@ -1,7 +1,7 @@
-#Battlepass Plugin
+# Battlepass Plugin
 Author : JuniorDeveloper.
 
-##Commands
+## Commands
 * **/bp level :** 
  
  **Description :** Shows your level
@@ -17,7 +17,7 @@ Author : JuniorDeveloper.
   
  **Description:** Shows every level up. With xp and Level! **For example :** Level 1 1000XP!
 
-#Important infromation!
+# Important infromation!
 This is a plugin that is  free to use. Its friendly for you.
 
 If you have any troubles with the plugin or any updates,
