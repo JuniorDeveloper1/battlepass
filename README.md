@@ -36,10 +36,12 @@ feel free to say that.
 This message would be removed if its as good as done!**
 
 ### Recent updates
+
+**Update date : 28/07/2020**
  * Permission added : **battlepass.Staff**
  * Commands added : **/bp balance remove|add** Only for people with staff permission. **>Removed** 
  * Vault API added.
  * Help messages updated.
- * **/bp xp list <page>** fully completed. (Can be changed in config.(XP))
-
+ * **/bp xp list <pageNumber>** fully completed. (Can be changed in config.(XP))
+ 
 * Balance commands are removed. They will comeback in 1 or 2 days. 

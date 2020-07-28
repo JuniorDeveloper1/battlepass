@@ -1,6 +1,6 @@
 package me.JuniorDeveloper.battlepass.level;
 
-import me.JuniorDeveloper.battlepass.battlepassMain;
+import me.JuniorDeveloper.battlepass.BattlepassMain;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -15,7 +15,7 @@ public class LevelLevelUpSystem implements Listener {
     @EventHandler
     public void blockbreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
-        PlayerLevelManager playerLevelManager = battlepassMain.getInstance().levelManagerHashMap.get(player.getUniqueId());
+        PlayerLevelManager playerLevelManager = BattlepassMain.getInstance().levelManagerHashMap.get(player.getUniqueId());
         Block block = event.getBlock();
 
         if (block.getType() == Material.STONE) {
@@ -30,8 +30,8 @@ public class LevelLevelUpSystem implements Listener {
 
 
     public void xpcheck(Player player, PlayerLevelManager playerLevelManager) {
-        int level1 = battlepassMain.getInstance().getConfig().getInt("Levels.1.xp");
-        int level2 = battlepassMain.getInstance().getConfig().getInt("Levels.2.xp");
+        int level1 = BattlepassMain.getInstance().getConfig().getInt("Levels.1.xp");
+        int level2 = BattlepassMain.getInstance().getConfig().getInt("Levels.2.xp");
 
         int xp = playerLevelManager.getXp();
 

@@ -1,7 +1,7 @@
 name: Battlepass
 author: JuniorDeveloper
 version: ${version}
-main: me.JuniorDeveloper.battlepass.battlepassMain
+main: me.JuniorDeveloper.battlepass.BattlepassMain
 description: PeyVeyPey
 depend: [Vault]
 
@@ -12,5 +12,5 @@ permissions:
 commands:
   bp:
     description: Check your battlepass level!
-    usage: /<command> [level|challanges|check|xp|balance|deposit] [level|list|remove|add|check] [2|3|4|5]
+    usage: /<command> [level|challanges|check|xp|help|balance] [level|list] [2|3|4|5]
     aliases: [battlepass, BattlePass]
