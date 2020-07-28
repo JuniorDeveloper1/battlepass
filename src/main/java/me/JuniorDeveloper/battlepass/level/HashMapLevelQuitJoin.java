@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class HashMapLevelQuitJoin implements Listener {
-
+    private battlepassMain plugin = battlepassMain.getInstance();
 
     @EventHandler
     public void join(PlayerJoinEvent event) {
@@ -20,6 +20,9 @@ public class HashMapLevelQuitJoin implements Listener {
             battlepassMain.getInstance().levelManagerHashMap.put(player.getUniqueId(), new PlayerLevelManager(0, 0));
             battlepassMain.getInstance().getConfig().set("PlayerLevels." + player.getUniqueId() + ".level", 0);
             battlepassMain.getInstance().getConfig().set("PlayerLevels." + player.getUniqueId() + ".xp", 0);
+            if(!plugin.playerBank.containsKey(player.getUniqueId())){
+                plugin.playerBank.put(player.getUniqueId(), 0.0);
+            }
             battlepassMain.getInstance().saveConfig();
 
 
@@ -28,7 +31,9 @@ public class HashMapLevelQuitJoin implements Listener {
             int xp = battlepassMain.getInstance().getConfig().getInt("PlayerLevels." + player.getUniqueId() + ".xp");
             battlepassMain.getInstance().levelManagerHashMap.put(player.getUniqueId(), new PlayerLevelManager(level, xp));
             battlepassMain.getInstance().saveConfig();
-
+            if(!plugin.playerBank.containsKey(player.getUniqueId())){
+                plugin.playerBank.put(player.getUniqueId(), 0.0);
+            }
         }
     }
 

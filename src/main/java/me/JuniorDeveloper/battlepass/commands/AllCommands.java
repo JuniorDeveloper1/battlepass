@@ -3,7 +3,6 @@ package me.JuniorDeveloper.battlepass.commands;
 import me.JuniorDeveloper.battlepass.battlepassMain;
 import me.JuniorDeveloper.battlepass.level.PlayerLevelManager;
 import net.md_5.bungee.api.ChatColor;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,11 +12,8 @@ import org.bukkit.event.Listener;
 
 
 public class AllCommands implements Listener, CommandExecutor {
-
-
     public String cmd1 = "bp";
-    private Economy economy = battlepassMain.getInstance().economy;
-
+    private battlepassMain plugin = battlepassMain.getInstance();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -34,17 +30,19 @@ public class AllCommands implements Listener, CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             PlayerLevelManager playerLevelManager = battlepassMain.getInstance().levelManagerHashMap.get(player.getUniqueId());
-
             if (cmd.getName().equalsIgnoreCase(cmd1)) {
+
+
+
                 if (args.length == 0) {
                     //Help infromation
                     player.sendMessage(noArguments);
                     player.sendMessage(tryThis + ChatColor.GOLD + "/bp level" + ChatColor.GRAY + " Shows your level!");
                     player.sendMessage(tryThis + ChatColor.GOLD + "/bp challanges" + ChatColor.GRAY + " Shows challanges!");
-                    player.sendMessage(tryThis + ChatColor.GOLD + "/bp check <player>"+ ChatColor.GRAY + " Checks someone's player level!");
-                    player.sendMessage(tryThis + ChatColor.GOLD + "/bp xp list" +ChatColor.GRAY + " Checks the xp list for an level up!");
-                    player.sendMessage(tryThis + ChatColor.GOLD + "/bp balance <player>" + ChatColor.GRAY + "Checks someone's balance!.");
-                    if(player.hasPermission("battlepass.Staff")){
+                    player.sendMessage(tryThis + ChatColor.GOLD + "/bp check level <player>" + ChatColor.GRAY + " Checks someone's player level!");
+                    player.sendMessage(tryThis + ChatColor.GOLD + "/bp xp list" + ChatColor.GRAY + " Checks the xp list for an level up!");
+                    player.sendMessage(tryThis + ChatColor.GOLD + "/bp balance <player>" + ChatColor.GRAY + " Checks someone's balance!.");
+                    if (player.hasPermission("battlepass.Staff")) {
                         player.sendMessage(tryThis + ChatColor.GRAY + "/bp balance" + ChatColor.GOLD + "remove|add");
                     }
                     return true;
@@ -87,18 +85,17 @@ public class AllCommands implements Listener, CommandExecutor {
                     }
 
 
-
                 }
-                if(args[0].equalsIgnoreCase("xp")){
-                    if(args.length <= 1){
+                if (args[0].equalsIgnoreCase("xp")) {
+                    if (args.length <= 1) {
                         player.sendMessage(tryThis + ChatColor.RED + "/bp xp list");
                         return true;
                     }
-                    if (args[1].equalsIgnoreCase("list")){
+                    if (args[1].equalsIgnoreCase("list")) {
 
 
                         //Page 1
-                        int level1 =  battlepassMain.getInstance().getConfig().getInt("Levels.1.xp")   ;
+                        int level1 = battlepassMain.getInstance().getConfig().getInt("Levels.1.xp");
                         int level2 = battlepassMain.getInstance().getConfig().getInt("Levels.2.xp");
                         int level3 = battlepassMain.getInstance().getConfig().getInt("Levels.3.xp");
                         int level4 = battlepassMain.getInstance().getConfig().getInt("Levels.4.xp");
@@ -119,7 +116,7 @@ public class AllCommands implements Listener, CommandExecutor {
                         int level19 = battlepassMain.getInstance().getConfig().getInt("Levels.19.xp");
                         int level20 = battlepassMain.getInstance().getConfig().getInt("Levels.20.xp");
                         //Page 2
-                        int level21 =  battlepassMain.getInstance().getConfig().getInt("Levels.21.xp")   ;
+                        int level21 = battlepassMain.getInstance().getConfig().getInt("Levels.21.xp");
                         int level22 = battlepassMain.getInstance().getConfig().getInt("Levels.22.xp");
                         int level23 = battlepassMain.getInstance().getConfig().getInt("Levels.23.xp");
                         int level24 = battlepassMain.getInstance().getConfig().getInt("Levels.24.xp");
@@ -140,7 +137,7 @@ public class AllCommands implements Listener, CommandExecutor {
                         int level39 = battlepassMain.getInstance().getConfig().getInt("Levels.39.xp");
                         int level40 = battlepassMain.getInstance().getConfig().getInt("Levels.30.xp");
                         //Page 3
-                        int level41 =  battlepassMain.getInstance().getConfig().getInt("Levels.41.xp")   ;
+                        int level41 = battlepassMain.getInstance().getConfig().getInt("Levels.41.xp");
                         int level42 = battlepassMain.getInstance().getConfig().getInt("Levels.42.xp");
                         int level43 = battlepassMain.getInstance().getConfig().getInt("Levels.43.xp");
                         int level44 = battlepassMain.getInstance().getConfig().getInt("Levels.44.xp");
@@ -161,7 +158,7 @@ public class AllCommands implements Listener, CommandExecutor {
                         int level59 = battlepassMain.getInstance().getConfig().getInt("Levels.59.xp");
                         int level60 = battlepassMain.getInstance().getConfig().getInt("Levels.60.xp");
                         //page 4
-                        int level61 =  battlepassMain.getInstance().getConfig().getInt("Levels.61.xp")   ;
+                        int level61 = battlepassMain.getInstance().getConfig().getInt("Levels.61.xp");
                         int level62 = battlepassMain.getInstance().getConfig().getInt("Levels.62.xp");
                         int level63 = battlepassMain.getInstance().getConfig().getInt("Levels.63.xp");
                         int level64 = battlepassMain.getInstance().getConfig().getInt("Levels.64.xp");
@@ -171,7 +168,7 @@ public class AllCommands implements Listener, CommandExecutor {
                         int level68 = battlepassMain.getInstance().getConfig().getInt("Levels.68.xp");
                         int level69 = battlepassMain.getInstance().getConfig().getInt("Levels.69.xp");
                         int level70 = battlepassMain.getInstance().getConfig().getInt("Levels.70.xp");
-                        int level71 =  battlepassMain.getInstance().getConfig().getInt("Levels.71.xp");
+                        int level71 = battlepassMain.getInstance().getConfig().getInt("Levels.71.xp");
                         int level72 = battlepassMain.getInstance().getConfig().getInt("Levels.72.xp");
                         int level73 = battlepassMain.getInstance().getConfig().getInt("Levels.73.xp");
                         int level74 = battlepassMain.getInstance().getConfig().getInt("Levels.74.xp");
@@ -204,33 +201,33 @@ public class AllCommands implements Listener, CommandExecutor {
                         int level99 = battlepassMain.getInstance().getConfig().getInt("Levels.99.xp");
                         int level100 = battlepassMain.getInstance().getConfig().getInt("Levels.100.xp");
 
-                      if(args.length == 2){
-                          player.sendMessage(ChatColor.GRAY + "Level 1: " + ChatColor.GREEN + level1 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 2: " + ChatColor.GREEN + level2 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 3: " + ChatColor.GREEN + level3 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 4: " + ChatColor.GREEN + level4 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 5: " + ChatColor.GREEN + level5 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 6: " + ChatColor.GREEN + level6 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 7: " + ChatColor.GREEN + level7 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 8: " + ChatColor.GREEN + level8 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 9: " + ChatColor.GREEN + level9 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 10: " + ChatColor.GREEN + level10 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 11: " + ChatColor.GREEN + level11 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 12: " + ChatColor.GREEN + level12 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 13: " + ChatColor.GREEN + level13 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 14: " + ChatColor.GREEN + level14 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 15: " + ChatColor.GREEN + level15 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 16: " + ChatColor.GREEN + level16 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 17: " + ChatColor.GREEN + level17 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 18: " + ChatColor.GREEN + level18 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 19: " + ChatColor.GREEN + level19 + ChatColor.GRAY + " needed!");
-                          player.sendMessage(ChatColor.GRAY + "Level 20: " + ChatColor.GREEN + level20 + ChatColor.GRAY + " needed!");
-                        player.sendMessage(tryThis + ChatColor.GRAY + "/bp xp list 2" + ChatColor.GOLD + " for page 2!");
-                        return true;
-                      }
-                        if(args[2].equalsIgnoreCase("2")){
-                            if(args.length == 3){
-                                player.sendMessage(ChatColor.GOLD + "--------------"+ChatColor.GRAY+ "Page 2"+ChatColor.GOLD +"------------");
+                        if (args.length == 2) {
+                            player.sendMessage(ChatColor.GRAY + "Level 1: " + ChatColor.GREEN + level1 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 2: " + ChatColor.GREEN + level2 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 3: " + ChatColor.GREEN + level3 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 4: " + ChatColor.GREEN + level4 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 5: " + ChatColor.GREEN + level5 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 6: " + ChatColor.GREEN + level6 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 7: " + ChatColor.GREEN + level7 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 8: " + ChatColor.GREEN + level8 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 9: " + ChatColor.GREEN + level9 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 10: " + ChatColor.GREEN + level10 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 11: " + ChatColor.GREEN + level11 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 12: " + ChatColor.GREEN + level12 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 13: " + ChatColor.GREEN + level13 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 14: " + ChatColor.GREEN + level14 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 15: " + ChatColor.GREEN + level15 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 16: " + ChatColor.GREEN + level16 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 17: " + ChatColor.GREEN + level17 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 18: " + ChatColor.GREEN + level18 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 19: " + ChatColor.GREEN + level19 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(ChatColor.GRAY + "Level 20: " + ChatColor.GREEN + level20 + ChatColor.GRAY + " needed!");
+                            player.sendMessage(tryThis + ChatColor.GRAY + "/bp xp list 2" + ChatColor.GOLD + " for page 2!");
+                            return true;
+                        }
+                        if (args[2].equalsIgnoreCase("2")) {
+                            if (args.length == 3) {
+                                player.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.GRAY + "Page 2" + ChatColor.GOLD + "------------");
                                 player.sendMessage(ChatColor.GRAY + "Level 21: " + ChatColor.GREEN + level21 + ChatColor.GRAY + " needed!");
                                 player.sendMessage(ChatColor.GRAY + "Level 22: " + ChatColor.GREEN + level22 + ChatColor.GRAY + " needed!");
                                 player.sendMessage(ChatColor.GRAY + "Level 23: " + ChatColor.GREEN + level23 + ChatColor.GRAY + " needed!");
@@ -240,7 +237,7 @@ public class AllCommands implements Listener, CommandExecutor {
                                 player.sendMessage(ChatColor.GRAY + "Level 27: " + ChatColor.GREEN + level27 + ChatColor.GRAY + " needed!");
                                 player.sendMessage(ChatColor.GRAY + "Level 28: " + ChatColor.GREEN + level28 + ChatColor.GRAY + " needed!");
                                 player.sendMessage(ChatColor.GRAY + "Level 29: " + ChatColor.GREEN + level29 + ChatColor.GRAY + " needed!");
-                                player.sendMessage(ChatColor.GRAY + "Level 20: " + ChatColor.GREEN + level30 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 30: " + ChatColor.GREEN + level30 + ChatColor.GRAY + " needed!");
                                 player.sendMessage(ChatColor.GRAY + "Level 31: " + ChatColor.GREEN + level31 + ChatColor.GRAY + " needed!");
                                 player.sendMessage(ChatColor.GRAY + "Level 32: " + ChatColor.GREEN + level32 + ChatColor.GRAY + " needed!");
                                 player.sendMessage(ChatColor.GRAY + "Level 33: " + ChatColor.GREEN + level33 + ChatColor.GRAY + " needed!");
@@ -251,15 +248,16 @@ public class AllCommands implements Listener, CommandExecutor {
                                 player.sendMessage(ChatColor.GRAY + "Level 38: " + ChatColor.GREEN + level38 + ChatColor.GRAY + " needed!");
                                 player.sendMessage(ChatColor.GRAY + "Level 39: " + ChatColor.GREEN + level39 + ChatColor.GRAY + " needed!");
                                 player.sendMessage(ChatColor.GRAY + "Level 40: " + ChatColor.GREEN + level40 + ChatColor.GRAY + " needed!");
-                                player.sendMessage(ChatColor.GOLD + "--------------"+ChatColor.GRAY+"Page 2"+ChatColor.GOLD +"------------");
+                                player.sendMessage(tryThis + ChatColor.GRAY + "/bp xp list 3" + ChatColor.GOLD + " for page 3!");
+                                player.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.GRAY + "Page 2" + ChatColor.GOLD + "------------");
                                 return true;
                             }
 
                         }
 
-                        if (args[2].equalsIgnoreCase("3")){
-                            if(args.length == 3){
-                                player.sendMessage(ChatColor.GOLD + "--------------"+ChatColor.GRAY+ "Page 3"+ChatColor.GOLD +"------------");
+                        if (args[2].equalsIgnoreCase("3")) {
+                            if (args.length == 3) {
+                                player.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.GRAY + "Page 3" + ChatColor.GOLD + "------------");
                                 player.sendMessage(ChatColor.GRAY + "Level 41: " + ChatColor.GREEN + level41 + ChatColor.GRAY + " needed!");
                                 player.sendMessage(ChatColor.GRAY + "Level 42: " + ChatColor.GREEN + level42 + ChatColor.GRAY + " needed!");
                                 player.sendMessage(ChatColor.GRAY + "Level 43: " + ChatColor.GREEN + level43 + ChatColor.GRAY + " needed!");
@@ -280,118 +278,78 @@ public class AllCommands implements Listener, CommandExecutor {
                                 player.sendMessage(ChatColor.GRAY + "Level 58: " + ChatColor.GREEN + level58 + ChatColor.GRAY + " needed!");
                                 player.sendMessage(ChatColor.GRAY + "Level 59: " + ChatColor.GREEN + level59 + ChatColor.GRAY + " needed!");
                                 player.sendMessage(ChatColor.GRAY + "Level 60: " + ChatColor.GREEN + level60 + ChatColor.GRAY + " needed!");
-                                player.sendMessage(ChatColor.GOLD + "--------------"+ChatColor.GRAY+"Page 3"+ChatColor.GOLD +"------------");
+                                player.sendMessage(tryThis + ChatColor.GRAY + "/bp xp list 5" + ChatColor.GOLD + " for page 4!");
+                                player.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.GRAY + "Page 3" + ChatColor.GOLD + "------------");
                                 return true;
                             }
                         }
 
-                            if(args[2].equalsIgnoreCase("4")){
-                               if(args.length == 3){
-                                   player.sendMessage(ChatColor.GOLD + "--------------"+ChatColor.GRAY+ "Page 4"+ChatColor.GOLD +"------------");
-                                   player.sendMessage(ChatColor.GRAY + "Level 61: " + ChatColor.GREEN + level61 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 62: " + ChatColor.GREEN + level62 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 63: " + ChatColor.GREEN + level63 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 64: " + ChatColor.GREEN + level64 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 65: " + ChatColor.GREEN + level65 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 66: " + ChatColor.GREEN + level66 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 67: " + ChatColor.GREEN + level67 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 68: " + ChatColor.GREEN + level68 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 69: " + ChatColor.GREEN + level69 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 70: " + ChatColor.GREEN + level70 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 71: " + ChatColor.GREEN + level71 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 72: " + ChatColor.GREEN + level72 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 73: " + ChatColor.GREEN + level73 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 74: " + ChatColor.GREEN + level74 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 75: " + ChatColor.GREEN + level75 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 76: " + ChatColor.GREEN + level76 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 77: " + ChatColor.GREEN + level77 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 78: " + ChatColor.GREEN + level78 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 79: " + ChatColor.GREEN + level79 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GRAY + "Level 80: " + ChatColor.GREEN + level80 + ChatColor.GRAY + " needed!");
-                                   player.sendMessage(ChatColor.GOLD + "--------------"+ChatColor.GRAY+"Page 4"+ChatColor.GOLD +"------------");
-                                   return true;
-                               }
+                        if (args[2].equalsIgnoreCase("4")) {
+                            if (args.length == 3) {
+                                player.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.GRAY + "Page 4" + ChatColor.GOLD + "------------");
+                                player.sendMessage(ChatColor.GRAY + "Level 61: " + ChatColor.GREEN + level61 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 62: " + ChatColor.GREEN + level62 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 63: " + ChatColor.GREEN + level63 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 64: " + ChatColor.GREEN + level64 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 65: " + ChatColor.GREEN + level65 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 66: " + ChatColor.GREEN + level66 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 67: " + ChatColor.GREEN + level67 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 68: " + ChatColor.GREEN + level68 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 69: " + ChatColor.GREEN + level69 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 70: " + ChatColor.GREEN + level70 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 71: " + ChatColor.GREEN + level71 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 72: " + ChatColor.GREEN + level72 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 73: " + ChatColor.GREEN + level73 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 74: " + ChatColor.GREEN + level74 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 75: " + ChatColor.GREEN + level75 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 76: " + ChatColor.GREEN + level76 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 77: " + ChatColor.GREEN + level77 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 78: " + ChatColor.GREEN + level78 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 79: " + ChatColor.GREEN + level79 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 80: " + ChatColor.GREEN + level80 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(tryThis + ChatColor.GRAY + "/bp xp list 5" + ChatColor.GOLD + " for page 5!");
+                                player.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.GRAY + "Page 4" + ChatColor.GOLD + "------------");
+                                return true;
                             }
+                        }
 
-                            if (args[2].equalsIgnoreCase("5")){
-                                if (args.length == 3){
-                                    player.sendMessage(ChatColor.GOLD + "--------------"+ChatColor.GRAY+ "Page 5"+ChatColor.GOLD +"------------");
-                                    player.sendMessage(ChatColor.GRAY + "Level 81: " + ChatColor.GREEN + level81 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 82: " + ChatColor.GREEN + level82 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 83: " + ChatColor.GREEN + level83 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 84: " + ChatColor.GREEN + level84 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 85: " + ChatColor.GREEN + level85 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 86: " + ChatColor.GREEN + level86 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 87: " + ChatColor.GREEN + level87 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 88: " + ChatColor.GREEN + level88 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 89: " + ChatColor.GREEN + level89 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 90: " + ChatColor.GREEN + level90 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 91: " + ChatColor.GREEN + level91 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 92: " + ChatColor.GREEN + level92 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 93: " + ChatColor.GREEN + level93 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 94: " + ChatColor.GREEN + level94 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 95: " + ChatColor.GREEN + level95 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 96: " + ChatColor.GREEN + level96 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 97: " + ChatColor.GREEN + level97 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 98: " + ChatColor.GREEN + level98 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 99: " + ChatColor.GREEN + level99 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GRAY + "Level 100: " + ChatColor.GREEN + level100 + ChatColor.GRAY + " needed!");
-                                    player.sendMessage(ChatColor.GOLD + "--------------"+ChatColor.GRAY+"Page 5"+ChatColor.GOLD +"------------");
-                                    return true;
-                                }
+                        if (args[2].equalsIgnoreCase("5")) {
+                            if (args.length == 3) {
+                                player.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.GRAY + "Page 5" + ChatColor.GOLD + "------------");
+                                player.sendMessage(ChatColor.GRAY + "Level 81: " + ChatColor.GREEN + level81 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 82: " + ChatColor.GREEN + level82 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 83: " + ChatColor.GREEN + level83 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 84: " + ChatColor.GREEN + level84 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 85: " + ChatColor.GREEN + level85 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 86: " + ChatColor.GREEN + level86 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 87: " + ChatColor.GREEN + level87 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 88: " + ChatColor.GREEN + level88 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 89: " + ChatColor.GREEN + level89 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 90: " + ChatColor.GREEN + level90 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 91: " + ChatColor.GREEN + level91 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 92: " + ChatColor.GREEN + level92 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 93: " + ChatColor.GREEN + level93 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 94: " + ChatColor.GREEN + level94 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 95: " + ChatColor.GREEN + level95 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 96: " + ChatColor.GREEN + level96 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 97: " + ChatColor.GREEN + level97 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 98: " + ChatColor.GREEN + level98 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 99: " + ChatColor.GREEN + level99 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GRAY + "Level 100: " + ChatColor.GREEN + level100 + ChatColor.GRAY + " needed!");
+                                player.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.GRAY + "Page 5" + ChatColor.GOLD + "------------");
+                                return true;
                             }
+                        }
                         battlepassMain.getInstance().saveConfig();
-                      } //End bp xp list <page>
+                    } //End bp xp list <page>
                 } //End bp xp <list>
 
                 /**
                  * Begin Vault Commands, End Level Commands.
                  */
 
-                if (args[0].equalsIgnoreCase("balance")) {
 
-                    if(player.hasPermission("battlepass.Staff")){
-                        if(args.length == 1){
-                            player.sendMessage(staff + tryThis + ChatColor.GRAY + "/bp balance" + ChatColor.GOLD + "remove|add");
-                        }
-                        if(args[1].equalsIgnoreCase("add")){
-                            if(args.length == 3){
-                            Player target = Bukkit.getPlayer(args[2]);
-                            int addAmount = Integer.parseInt(args[3]);
-                            economy.depositPlayer(target,addAmount);
-                                player.sendMessage(ChatColor.GRAY + "You have deposited " + ChatColor.GREEN + addAmount + ChatColor.GRAY +" into " + ChatColor.GOLD + target.getName() + ChatColor.GRAY + "'s account");
-                            }
-                            return true;
-                        }
-                        if(args[1].equalsIgnoreCase("remove")){
-                            if(args.length == 3){
-                                Player target = Bukkit.getPlayer(args[2]);
-                                int removeAmout = Integer.parseInt(args[3]);
-                                economy.withdrawPlayer(target, removeAmout);
-                                player.sendMessage(ChatColor.GRAY + "You have withdrawed " + ChatColor.RED + removeAmout + ChatColor.GRAY +" from " + ChatColor.GOLD + target.getName() + ChatColor.GRAY + "'s account");
-                            }
-                        return true;
-                        }
-
-                    }else{
-                        player.sendMessage(noPermissions);
-                    }
-
-                    if(args.length == 1){
-                        int balance = (int) economy.getBalance(player);
-                        player.sendMessage("Your Balance is :" + balance);
-                        player.sendMessage(tryThis + ChatColor.GOLD + "/bp balance <player>");
-                        return true;
-                    }
-                    if (args.length == 2) {
-                            Player target = Bukkit.getPlayer(args[1]);
-                            int balance = (int) economy.getBalance(target);
-                            player.sendMessage(ChatColor.GREEN + target.getName() + " §7has §a$" + balance + "§7 in their account");
-                    }
-                    return true;
-                }
-
-            }/* End "/bp <args> <args> <args>" */ else  {
+            }/* End "/bp <args> <args> <args>" */ else {
                 player.sendMessage(logo + noPermissions);
                 return true;
             }

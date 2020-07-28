@@ -37,7 +37,9 @@ This message would be removed if its as good as done!**
 
 ### Recent updates
  * Permission added : **battlepass.Staff**
- * Commands added : **/bp balance remove|add** Only for people with staff permission. 
+ * Commands added : **/bp balance remove|add** Only for people with staff permission. **>Removed** 
  * Vault API added.
  * Help messages updated.
- 
+ * **/bp xp list <page>** fully completed. (Can be changed in config.(XP))
+
+* Balance commands are removed. They will comeback in 1 or 2 days. 
