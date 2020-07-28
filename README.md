@@ -14,8 +14,16 @@ Author : JuniorDeveloper.
   
  **Description :** Checks an player level!
 *   **bp xp list :**
-  
+ 
  **Description:** Shows every level up. With xp and Level! **For example :** Level 1 1000XP!
+ 
+ *   **/bp balance | player** 
+    
+  **Description :** Checks your balance or an player balance!
+  
+ * **/bp balance add|remove**
+ 
+ **Description:** Add | remove an amount of money from a player. 
 
 # Important infromation!
 This is a plugin that is  free to use. Its friendly for you.
@@ -26,3 +34,10 @@ feel free to say that.
 
 **This plugin is not DONE it wil take some time for to complete it.
 This message would be removed if its as good as done!**
+
+### Recent updates
+ * Permission added : **battlepass.Staff**
+ * Commands added : **/bp balance remove|add** Only for people with staff permission. 
+ * Vault API added.
+ * Help messages updated.
+ 

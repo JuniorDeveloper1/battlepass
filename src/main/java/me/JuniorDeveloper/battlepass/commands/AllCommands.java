@@ -1,7 +1,9 @@
-package me.JuniorDeveloper.battlepass.level;
+package me.JuniorDeveloper.battlepass.commands;
 
 import me.JuniorDeveloper.battlepass.battlepassMain;
+import me.JuniorDeveloper.battlepass.level.PlayerLevelManager;
 import net.md_5.bungee.api.ChatColor;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,10 +12,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 
-public class LevelCommands implements Listener, CommandExecutor {
+public class AllCommands implements Listener, CommandExecutor {
 
 
     public String cmd1 = "bp";
+    private Economy economy = battlepassMain.getInstance().economy;
 
 
     @Override
@@ -24,6 +27,7 @@ public class LevelCommands implements Listener, CommandExecutor {
         String noPermissions = ChatColor.translateAlternateColorCodes('&', "&c You don't have enough permissions.");
         String noArguments = ChatColor.translateAlternateColorCodes('&', "&c&lNO &3 arugments have been found!");
         String commandUsage = ChatColor.translateAlternateColorCodes('&', "&c&lUssage : &c/bp check level <player>!");
+        String staff = ChatColor.translateAlternateColorCodes('&', "&7[&6Staff&7]");
         String tryThis = ChatColor.translateAlternateColorCodes('&', "&a&lTry! :");
 
 
@@ -37,8 +41,12 @@ public class LevelCommands implements Listener, CommandExecutor {
                     player.sendMessage(noArguments);
                     player.sendMessage(tryThis + ChatColor.GOLD + "/bp level" + ChatColor.GRAY + " Shows your level!");
                     player.sendMessage(tryThis + ChatColor.GOLD + "/bp challanges" + ChatColor.GRAY + " Shows challanges!");
-                    player.sendMessage(tryThis + ChatColor.GOLD + "/bp check <player>"+ ChatColor.GRAY + " Checks an player level!");
+                    player.sendMessage(tryThis + ChatColor.GOLD + "/bp check <player>"+ ChatColor.GRAY + " Checks someone's player level!");
                     player.sendMessage(tryThis + ChatColor.GOLD + "/bp xp list" +ChatColor.GRAY + " Checks the xp list for an level up!");
+                    player.sendMessage(tryThis + ChatColor.GOLD + "/bp balance <player>" + ChatColor.GRAY + "Checks someone's balance!.");
+                    if(player.hasPermission("battlepass.Staff")){
+                        player.sendMessage(tryThis + ChatColor.GRAY + "/bp balance" + ChatColor.GOLD + "remove|add");
+                    }
                     return true;
 
                 }
@@ -332,16 +340,58 @@ public class LevelCommands implements Listener, CommandExecutor {
                                     return true;
                                 }
                             }
-
-
-
                         battlepassMain.getInstance().saveConfig();
+                      } //End bp xp list <page>
+                } //End bp xp <list>
 
-                      }
+                /**
+                 * Begin Vault Commands, End Level Commands.
+                 */
+
+                if (args[0].equalsIgnoreCase("balance")) {
+
+                    if(player.hasPermission("battlepass.Staff")){
+                        if(args.length == 1){
+                            player.sendMessage(staff + tryThis + ChatColor.GRAY + "/bp balance" + ChatColor.GOLD + "remove|add");
+                        }
+                        if(args[1].equalsIgnoreCase("add")){
+                            if(args.length == 3){
+                            Player target = Bukkit.getPlayer(args[2]);
+                            int addAmount = Integer.parseInt(args[3]);
+                            economy.depositPlayer(target,addAmount);
+                                player.sendMessage(ChatColor.GRAY + "You have deposited " + ChatColor.GREEN + addAmount + ChatColor.GRAY +" into " + ChatColor.GOLD + target.getName() + ChatColor.GRAY + "'s account");
+                            }
+                            return true;
+                        }
+                        if(args[1].equalsIgnoreCase("remove")){
+                            if(args.length == 3){
+                                Player target = Bukkit.getPlayer(args[2]);
+                                int removeAmout = Integer.parseInt(args[3]);
+                                economy.withdrawPlayer(target, removeAmout);
+                                player.sendMessage(ChatColor.GRAY + "You have withdrawed " + ChatColor.RED + removeAmout + ChatColor.GRAY +" from " + ChatColor.GOLD + target.getName() + ChatColor.GRAY + "'s account");
+                            }
+                        return true;
+                        }
+
+                    }else{
+                        player.sendMessage(noPermissions);
+                    }
+
+                    if(args.length == 1){
+                        int balance = (int) economy.getBalance(player);
+                        player.sendMessage("Your Balance is :" + balance);
+                        player.sendMessage(tryThis + ChatColor.GOLD + "/bp balance <player>");
+                        return true;
+                    }
+                    if (args.length == 2) {
+                            Player target = Bukkit.getPlayer(args[1]);
+                            int balance = (int) economy.getBalance(target);
+                            player.sendMessage(ChatColor.GREEN + target.getName() + " §7has §a$" + balance + "§7 in their account");
+                    }
+                    return true;
                 }
 
-
-            } else {
+            }/* End "/bp <args> <args> <args>" */ else  {
                 player.sendMessage(logo + noPermissions);
                 return true;
             }
