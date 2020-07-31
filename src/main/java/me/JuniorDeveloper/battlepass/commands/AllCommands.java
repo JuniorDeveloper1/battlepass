@@ -66,7 +66,7 @@ public class AllCommands implements Listener, CommandExecutor {
                     player.sendMessage(tryThis + ChatColor.GOLD + "/bp balance " + ChatColor.GRAY + " Checks your balance!.");
 
                     if (player.hasPermission("battlepass.Staff")) {
-                        player.sendMessage(tryThis + ChatColor.GRAY + "/bp withdraw|desposit <player>");
+                        player.sendMessage(tryThis + ChatColor.GRAY + "/bp withdraw|desposit <player> <amount>");
 
                     }
                     return true;
@@ -168,20 +168,17 @@ public class AllCommands implements Listener, CommandExecutor {
 
                 if(player.hasPermission("battlepass.Staff"))    {
                     if(args[0].equalsIgnoreCase("withdraw"))    {
-
-
-
-
                         if(args.length == 0){
                             player.sendMessage(commandUsage);
                             return true;
                         }
                         if(args.length == 1)    {
-                            player.sendMessage(tryThis + Text.colorize("&a/bp withdraw &c<player> "));
+                            player.sendMessage(tryThis + Text.colorize("&a/bp withdraw &c<player> <amount> "));
                             return true;
                         }
 
                         if(args.length == 2){
+                            player.sendMessage(tryThis + Text.colorize("&a/bp withdraw <player> &c<amount> "));
                             return true;
                         }
                         if(args.length == 3){
@@ -190,17 +187,52 @@ public class AllCommands implements Listener, CommandExecutor {
                             try{
                                 Player target = Bukkit.getPlayer(args[1]);
                                 double remove_amount = Double.valueOf(args[2]);
-                                EconomyResponse response = eco.withdrawPlayer(target, remove_amount);
+                                deposit(target, remove_amount);
+                                player.sendMessage(Text.colorize("&7 You have succesfully removed ") + Text.colorize("&6$")  + remove_amount + Text.colorize(" &6 Dollar ")+  Text.colorize(" &7 from ") + Text.colorize(" &6") + target.getName() + Text.colorize(" &7balance!"));
 
-                                player.sendMessage(Text.colorize("&6 You have succesfully removed") + Text.colorize("&7") + eco.format(response.amount)
-                                        + Text.colorize("&6 from") + target.getName() + "balance!");
-                                player.sendMessage(Text.colorize("&6" + target.getName() + Text.colorize("&7 new balance is :") + eco.format(eco.getBalance(target))));
+                                target.sendMessage(Text.colorize("&7") + player.getName() + Text.colorize(" &7 has removed ") + Text.colorize("&6$")  + remove_amount + Text.colorize(" &6 Dollar ")+ Text.colorize("&7 from ")
+                                        + Text.colorize("&6") + Text.colorize(" &7your balance!"));
                             }catch (Exception e){
                                 e.printStackTrace();
                             }
                             return true;
                         }
 
+
+                    }
+                    if(args[0].equalsIgnoreCase("deposit")){
+                        if(args.length == 0){
+                            player.sendMessage(commandUsage);
+                            return true;
+                        }
+                        if(args.length == 1)    {
+                            player.sendMessage(tryThis + Text.colorize("&a/bp desposit &c<player> <amount> "));
+                            return true;
+                        }
+
+                        if(args.length == 2){
+                            player.sendMessage(tryThis + Text.colorize("&a/bp desposit <player> &c<amount> "));
+                            return true;
+                        }
+                        if(args.length == 3){
+
+
+                            try{
+                                Player target = Bukkit.getPlayer(args[1]);
+                                double add_amount = Double.valueOf(args[2]);
+                                deposit(target, add_amount);
+                                player.sendMessage(Text.colorize("&7 You have added ") + Text.colorize("&6$")  + add_amount + Text.colorize(" &6 Dollar ")+ Text.colorize("&7 to ")
+                                        + Text.colorize("&6") + target.getName() + Text.colorize(" &7 balance!"));
+
+                                target.sendMessage(Text.colorize("&7") + player.getName() + Text.colorize(" &7has added ") + Text.colorize("&6$")  + add_amount + Text.colorize(" &6 Dollar ")+ Text.colorize("&7 to ")
+                                        + Text.colorize("&6") + Text.colorize(" &7 your balance!"));
+
+
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                            return true;
+                        }
 
                     }
                 }else {
@@ -216,9 +248,35 @@ public class AllCommands implements Listener, CommandExecutor {
     return false;
     }
 
+    private boolean withdraw(Player player, double remove_amount)
+    {
+        EconomyResponse economyResponse = BattlepassMain.getEconomy().withdrawPlayer(player, remove_amount);
+        if (economyResponse.transactionSuccess()) {
+            player.sendMessage(Text.colorize("&6" + "" + Text.colorize("&7 new balance is :") + ""));
+            return true;
+        } else {
+            player.sendMessage(Text.colorize(String.format("&cAn error occurred: %s", economyResponse.errorMessage)));
+            return false;
+        }
+    }
 
+
+
+    private boolean deposit(Player player, double add_amout)
+    {
+        EconomyResponse economyResponse = BattlepassMain.getEconomy().depositPlayer(player, add_amout);
+        if (economyResponse.transactionSuccess()) {
+            player.sendMessage(Text.colorize("&6" + "" + Text.colorize("&7 new balance is :") + ""));
+            return true;
+        } else {
+            player.sendMessage(Text.colorize(String.format("&cAn error occurred: %s", economyResponse.errorMessage)));
+            return false;
+        }
+
+    }
 
 }
+
 
 
 

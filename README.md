@@ -10,7 +10,7 @@ Author : JuniorDeveloper.
  
    **Description:** Shows challanges!    
   
-*  **bp check <player> :** 
+*  **bp check <.player> :** 
   
  **Description :** Checks an player level!
 *   **bp xp list :**
@@ -21,16 +21,23 @@ Author : JuniorDeveloper.
     
   **Description :** Checks your balance or an player balance!
   
- * **/bp balance add|remove**
+ * **/bp withdraw|deposit  <.player> <.amount>**
  
- **Description:** Add | remove an amount of money from a player. 
+ **Description:** withdraw|deposit removes or adds money to an player.  
+ 
 
 # Important infromation!
-This is a plugin that is  free to use. Its friendly for you.
+
 
 If you have any troubles with the plugin or any updates,
 
-feel free to say that.
+feel free to message me on discord. Yess#0781. **You can ask for private updates**
+
+
+### Important > Vault.
+This plugin uses vaultAPI. You need to have Vault in your plugin asswel as a Economy plugin. Vault can't load the plugin otherwise and Battlepass will disable.
+
+The plugin i used for the economy is :  IConomy. On the vault website you can check for other Economy plugins.
 
 **This plugin is not DONE it wil take some time for to complete it.
 This message would be removed if its as good as done!**
@@ -45,3 +52,9 @@ This message would be removed if its as good as done!**
  * **/bp xp list <pageNumber>** fully completed. (Can be changed in config.(XP))
  
 * Balance commands are removed. They will comeback in 1 or 2 days. 
+
+**Update date: 31/07/2020**
+
+* Vault commands are fixed. : **/bp withdraw|deposit <player> <amount>**
+
+* Text messages are been changed.
