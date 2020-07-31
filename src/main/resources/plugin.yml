@@ -3,7 +3,8 @@ author: JuniorDeveloper
 version: ${version}
 main: me.JuniorDeveloper.battlepass.BattlepassMain
 description: PeyVeyPey
-depend: [Vault]
+api-version: 1.13
+
 
 permissions:
   battlepass.Staff:
@@ -12,5 +13,8 @@ permissions:
 commands:
   bp:
     description: Check your battlepass level!
-    usage: /<command> [level|challanges|check|xp|help|balance] [level|list] [2|3|4|5]
+    usage: /<command> [level|challanges|check|xp|help|balance|withdraw] [level|list] [2|3|4|5]
     aliases: [battlepass, BattlePass]
+
+depend:
+  - Vault

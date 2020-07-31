@@ -11,16 +11,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 public class BattlepassMain extends JavaPlugin {
 
 
-    private static final Logger log = Logger.getLogger("Minecraft");
     public static HashMap<UUID, PlayerLevelManager> levelManagerHashMap;
     public static BattlepassMain instance;
-    public final HashMap<UUID, Double> playerBank = new HashMap<>();
-    public Economy economy;
+    private static Economy economy = null;
     private AllCommands commands = new AllCommands();
 
 
@@ -32,11 +29,12 @@ public class BattlepassMain extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        if (!setupEconomy()) {
-            log.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
+        if (!setupEconomy() ) {
+            System.out.println("Disabled due to no Vault dependency found!");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+
 
         instance = this;
         this.levelManagerHashMap = new HashMap<>();
@@ -58,9 +56,8 @@ public class BattlepassMain extends JavaPlugin {
 
     }
 
-
     private boolean setupEconomy() {
-        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
+        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
         if (economyProvider != null) {
             economy = economyProvider.getProvider();
         }
@@ -68,9 +65,10 @@ public class BattlepassMain extends JavaPlugin {
         return (economy != null);
     }
 
-    public Economy getEconomy() {
+    public static Economy getEconomy() {
         return economy;
     }
+
 
     @Override
     public void onDisable() {

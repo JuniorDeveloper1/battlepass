@@ -4,6 +4,8 @@ import me.JuniorDeveloper.battlepass.BattlepassMain;
 import me.JuniorDeveloper.battlepass.helper.Text;
 import me.JuniorDeveloper.battlepass.level.PlayerLevelManager;
 import net.md_5.bungee.api.ChatColor;
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,10 +21,13 @@ import java.util.stream.IntStream;
 
 
 public class AllCommands implements Listener, CommandExecutor {
+    Economy eco = BattlepassMain.getEconomy();
+
     public String cmd1 = "bp";
     private BattlepassMain plugin = BattlepassMain.getInstance();
 
-    @Override
+
+@Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
 
@@ -58,8 +63,11 @@ public class AllCommands implements Listener, CommandExecutor {
                     player.sendMessage(tryThis + ChatColor.GOLD + "/bp check level <player>" + ChatColor.GRAY + " Checks someone's player level!");
                     player.sendMessage(tryThis + ChatColor.GOLD + "/bp xp list <pageNumber>" + ChatColor.GRAY + " Checks the xp list for an level up!");
                     player.sendMessage(tryThis + ChatColor.GOLD + "/bp balance <player>" + ChatColor.GRAY + " Checks someone's balance!.");
+                    player.sendMessage(tryThis + ChatColor.GOLD + "/bp balance " + ChatColor.GRAY + " Checks your balance!.");
+
                     if (player.hasPermission("battlepass.Staff")) {
-                        player.sendMessage(tryThis + ChatColor.GRAY + "/bp balance" + ChatColor.GOLD + "remove|add");
+                        player.sendMessage(tryThis + ChatColor.GRAY + "/bp withdraw|desposit <player>");
+
                     }
                     return true;
 
@@ -110,8 +118,9 @@ public class AllCommands implements Listener, CommandExecutor {
                         return true;
                     }
                     if (args[1].equalsIgnoreCase("list")) {
-                        if(args.length == 2){
+                        if (args.length == 2) {
                             player.sendMessage(ChatColor.RED + "You need a page number!");
+                            return true;
                         }
                         List<Integer> levels = new ArrayList<>();
 
@@ -131,34 +140,87 @@ public class AllCommands implements Listener, CommandExecutor {
 
 
                 if (args[0].equalsIgnoreCase("balance")) {
-                    if (args.length == 2) {
-                        try {
-                            Player target = Bukkit.getPlayer(args[1]);
-                            int balance = (int) plugin.getEconomy().getBalance(target);
-                            player.sendMessage(ChatColor.GREEN + target.getName() + " §7has §a$" + balance + "in their account");
+                    Economy economy = BattlepassMain.getEconomy();
 
+                    if (args.length == 0) {
+                        player.sendMessage(tryThis + ChatColor.GOLD + "/bp balance " + ChatColor.GRAY + " Checks your balance!.");
+                        return true;
+                    }
+
+
+                    if (args.length == 1) {
+                        player.sendMessage(Text.colorize("&6") + "Your current balance is " + Text.colorize("&7 $") + economy.format(economy.getBalance(player)));
+                        return true;
+                    }
+
+                    if (args.length == 2) {
+                        Player checkOtherBalance = Bukkit.getPlayer(args[1]);
+                        try {
+                            player.sendMessage(Text.colorize("&6") + checkOtherBalance.getName() +
+                                    Text.colorize(" §7has $") + economy.format(economy.getBalance(checkOtherBalance)) + Text.colorize(" &7 in their account"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        return true;
                     }
+
+                }
+
+                if(player.hasPermission("battlepass.Staff"))    {
+                    if(args[0].equalsIgnoreCase("withdraw"))    {
+
+
+
+
+                        if(args.length == 0){
+                            player.sendMessage(commandUsage);
+                            return true;
+                        }
+                        if(args.length == 1)    {
+                            player.sendMessage(tryThis + Text.colorize("&a/bp withdraw &c<player> "));
+                            return true;
+                        }
+
+                        if(args.length == 2){
+                            return true;
+                        }
+                        if(args.length == 3){
+
+
+                            try{
+                                Player target = Bukkit.getPlayer(args[1]);
+                                double remove_amount = Double.valueOf(args[2]);
+                                EconomyResponse response = eco.withdrawPlayer(target, remove_amount);
+
+                                player.sendMessage(Text.colorize("&6 You have succesfully removed") + Text.colorize("&7") + eco.format(response.amount)
+                                        + Text.colorize("&6 from") + target.getName() + "balance!");
+                                player.sendMessage(Text.colorize("&6" + target.getName() + Text.colorize("&7 new balance is :") + eco.format(eco.getBalance(target))));
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                            return true;
+                        }
+
+
+                    }
+                }else {
+                    player.sendMessage(noPermissions);
                     return true;
                 }
 
-                /**
-                 * Begin Vault Commands, End Level Commands.
-                 */
-
-            }/* End "/bp <args> <args> <args>" */ else {
-                player.sendMessage(logo + noPermissions);
+            } /* End "/bp <args> <args> <args>" */ else {
                 return true;
             }
             return true;
-        } else {
-            Bukkit.getServer().getConsoleSender().sendMessage("U heeft geen toegang tot dit.");
         }
-        return false;
-
-
+    return false;
     }
 
+
+
 }
+
+
+
+
+
