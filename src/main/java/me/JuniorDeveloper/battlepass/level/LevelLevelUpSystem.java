@@ -1,17 +1,14 @@
 package me.JuniorDeveloper.battlepass.level;
 
-import me.JuniorDeveloper.battlepass.BattlepassMain;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
 
 public class LevelLevelUpSystem implements Listener {
 
-
-
+/**
+ * Doesn't need to work anymore. All of this is going to the ChallangeListener.
+ * This will be deleted before the plugin is fully done.
+ */
+/*
     @EventHandler
     public void blockbreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
@@ -48,12 +45,6 @@ public class LevelLevelUpSystem implements Listener {
             playerLevelManager.setLevel(2);
         }
     }
-
-
-
-/*
-
-
 */
 
 }

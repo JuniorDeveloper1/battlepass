@@ -25,18 +25,19 @@ public class AllCommands implements Listener, CommandExecutor {
 
     public String cmd1 = "bp";
     private BattlepassMain plugin = BattlepassMain.getInstance();
+    static String logo = ChatColor.translateAlternateColorCodes('&', "//");
+   static String noPermissions = ChatColor.translateAlternateColorCodes('&', "&c You don't have enough permissions.");
+    static String noArguments = ChatColor.translateAlternateColorCodes('&', "&c&lNO &3 arugments have been found!");
+    static String commandUsage = ChatColor.translateAlternateColorCodes('&', "&c&lUssage : &c/bp check level <player>!");
+    static String staff = ChatColor.translateAlternateColorCodes('&', "&7[&6Staff&7]");
+    static String tryThis = ChatColor.translateAlternateColorCodes('&', "&a&lTry! :");
 
 
-@Override
+
+    @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
 
-        String logo = ChatColor.translateAlternateColorCodes('&', "//");
-        String noPermissions = ChatColor.translateAlternateColorCodes('&', "&c You don't have enough permissions.");
-        String noArguments = ChatColor.translateAlternateColorCodes('&', "&c&lNO &3 arugments have been found!");
-        String commandUsage = ChatColor.translateAlternateColorCodes('&', "&c&lUssage : &c/bp check level <player>!");
-        String staff = ChatColor.translateAlternateColorCodes('&', "&7[&6Staff&7]");
-        String tryThis = ChatColor.translateAlternateColorCodes('&', "&a&lTry! :");
 
 
         if (sender instanceof Player) {
@@ -77,6 +78,9 @@ public class AllCommands implements Listener, CommandExecutor {
                 if (args[0].equalsIgnoreCase("level")) {
                     player.sendMessage(ChatColor.GRAY + "Your level is : " + ChatColor.GREEN + playerLevelManager.getLevel());
 
+                }
+                if(args[0].equalsIgnoreCase("xp")){
+                    player.sendMessage(ChatColor.GRAY + "Your xp is : " + ChatColor.GREEN + playerLevelManager.getXp());
                 }
                 if (args[0].equalsIgnoreCase("challanges")) {
                     player.sendMessage(ChatColor.GRAY + " Your challanges ! :");

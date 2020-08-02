@@ -1,4 +1,33 @@
 PlayerLevels:
+Messages:
+  logo: "//"
+
+
+BlockAmount:
+  coal-ore:
+    amount: 10
+
+  iron-ore:
+     amount: 15
+
+  gold-ore:
+     amount: 25
+
+  lapis_ore:
+     amount: 30
+
+  redstone_ore:
+     amount: 35
+
+  emerald-ore:
+     amount: 40
+
+
+  diamond-ore:
+     amount: 50
+
+
+
 Levels:
   1:
     xp: 1000

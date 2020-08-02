@@ -13,47 +13,43 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class BattlepassMain extends JavaPlugin {
-
-
     public static HashMap<UUID, PlayerLevelManager> levelManagerHashMap;
+    public static HashMap<UUID, Integer> coal_ore;
+    public static HashMap<UUID, Integer> diamond_ore;
+    public static HashMap<UUID, Integer> emerald_ore;
+    public static HashMap<UUID, Integer> lapis_ore;
+    public static HashMap<UUID, Integer> redstone_ore;
+    public static HashMap<UUID, Integer> gold_ore;
+    public static HashMap<UUID, Integer> iron_ore;
+
     public static BattlepassMain instance;
     private static Economy economy = null;
     private AllCommands commands = new AllCommands();
 
 
-    public static BattlepassMain getInstance() {
-        return instance;
+    public static BattlepassMain getInstance() { return instance; }
 
-    }
-
+    public static Economy getEconomy() { return economy; }
 
     @Override
     public void onEnable() {
-        if (!setupEconomy() ) {
+        if (!setupEconomy()) {
             System.out.println("Disabled due to no Vault dependency found!");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
-
-
+        hashmaps();
         instance = this;
-        this.levelManagerHashMap = new HashMap<>();
         this.getConfig().options().copyDefaults(true);
         this.saveConfig();
         this.reloadConfig();
         getCommand(commands.cmd1).setExecutor(commands);
-
         //Level System
         getServer().getPluginManager().registerEvents(new AllCommands(), this);
         getServer().getPluginManager().registerEvents(new LevelLevelUpSystem(), this);
         getServer().getPluginManager().registerEvents(new HashMapLevelQuitJoin(), this);
         //Level System
-
-        //Vault system
-        //Vault System
-
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Battlepass is fully enabled!");
-
     }
 
     private boolean setupEconomy() {
@@ -61,16 +57,21 @@ public class BattlepassMain extends JavaPlugin {
         if (economyProvider != null) {
             economy = economyProvider.getProvider();
         }
-
         return (economy != null);
     }
 
-    public static Economy getEconomy() {
-        return economy;
+    public void hashmaps() {
+        this.levelManagerHashMap = new HashMap<>();
+        this.coal_ore = new HashMap<UUID, Integer>();
+        this.diamond_ore = new HashMap<UUID, Integer>();
+        this.emerald_ore = new HashMap<UUID, Integer>();
+        this.lapis_ore = new HashMap<UUID, Integer>();
+        this.redstone_ore = new HashMap<UUID, Integer>();
+        this.gold_ore = new HashMap<UUID, Integer>();
+        this.iron_ore = new HashMap<UUID, Integer>();
     }
 
 
     @Override
-    public void onDisable() {
-    }
+    public void onDisable() { }
 }

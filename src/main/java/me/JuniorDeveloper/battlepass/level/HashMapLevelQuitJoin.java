@@ -1,6 +1,7 @@
 package me.JuniorDeveloper.battlepass.level;
 
 import me.JuniorDeveloper.battlepass.BattlepassMain;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,6 +10,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class HashMapLevelQuitJoin implements Listener {
     private BattlepassMain plugin = BattlepassMain.getInstance();
+    Economy eco = BattlepassMain.getEconomy();
 
     @EventHandler
     public void join(PlayerJoinEvent event) {
@@ -18,6 +20,7 @@ public class HashMapLevelQuitJoin implements Listener {
             player.sendMessage("§bWelcome, your level is §a0");
 
             BattlepassMain.getInstance().levelManagerHashMap.put(player.getUniqueId(), new PlayerLevelManager(0, 0));
+
             BattlepassMain.getInstance().getConfig().set("PlayerLevels." + player.getUniqueId() + ".level", 0);
             BattlepassMain.getInstance().getConfig().set("PlayerLevels." + player.getUniqueId() + ".xp", 0);
             BattlepassMain.getInstance().saveConfig();
