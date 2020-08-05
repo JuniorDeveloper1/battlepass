@@ -28,6 +28,7 @@ public class HashMapLevelQuitJoin implements Listener {
             int level = BattlepassMain.getInstance().getConfig().getInt("PlayerLevels." + player.getUniqueId() + ".level");
             int xp = BattlepassMain.getInstance().getConfig().getInt("PlayerLevels." + player.getUniqueId() + ".xp");
             BattlepassMain.getInstance().levelManagerHashMap.put(player.getUniqueId(), new PlayerLevelManager(level, xp));
+
             BattlepassMain.getInstance().saveConfig();
         }
     }

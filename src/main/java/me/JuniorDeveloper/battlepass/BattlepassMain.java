@@ -1,5 +1,6 @@
 package me.JuniorDeveloper.battlepass;
 
+import me.JuniorDeveloper.battlepass.challanges.challangeListeners;
 import me.JuniorDeveloper.battlepass.commands.AllCommands;
 import me.JuniorDeveloper.battlepass.level.HashMapLevelQuitJoin;
 import me.JuniorDeveloper.battlepass.level.LevelLevelUpSystem;
@@ -49,7 +50,10 @@ public class BattlepassMain extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new LevelLevelUpSystem(), this);
         getServer().getPluginManager().registerEvents(new HashMapLevelQuitJoin(), this);
         //Level System
+        getServer().getPluginManager().registerEvents(new challangeListeners(), this);
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Battlepass is fully enabled!");
+        configMessages();
+
     }
 
     private boolean setupEconomy() {
@@ -71,6 +75,9 @@ public class BattlepassMain extends JavaPlugin {
         this.iron_ore = new HashMap<UUID, Integer>();
     }
 
+    public void configMessages(){
+        BattlepassMain.getInstance().saveConfig();
+    }
 
     @Override
     public void onDisable() { }

@@ -1,6 +1,12 @@
+
 PlayerLevels:
+
+  //Hey!! Thank you for having this plugin. But we need to make somethings sure... If you change something in the config make sure for too restart.
+  // You can also reload, BUT you need to make sure EVERYONE relogs. Otherwise the plugin will not work!
+Settings:
+  ore-xp-On_Off : true
 Messages:
-  logo: "//"
+  logo: '§6[§7BP§6] '
 
 
 BlockAmount:
@@ -8,27 +14,31 @@ BlockAmount:
     amount: 10
 
   iron-ore:
-     amount: 15
+    amount: 15
 
   gold-ore:
-     amount: 25
+    amount: 25
 
-  lapis_ore:
-     amount: 30
+  lapis-ore:
+    amount: 30
 
-  redstone_ore:
-     amount: 35
+  redstone-ore:
+    amount: 35
 
   emerald-ore:
-     amount: 40
+    amount: 40
 
 
   diamond-ore:
-     amount: 50
+    amount: 50
+
+
 
 
 
 Levels:
+  0:
+    xp: 0
   1:
     xp: 1000
 
@@ -94,7 +104,7 @@ Levels:
     xp: 21000
 
   22:
-     xp: 22000
+    xp: 22000
 
   23:
     xp: 23000
@@ -160,7 +170,7 @@ Levels:
     xp: 43000
 
   44:
-     xp: 44000
+    xp: 44000
 
   45:
     xp: 45000

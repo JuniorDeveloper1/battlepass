@@ -21,26 +21,21 @@ import java.util.stream.IntStream;
 
 
 public class AllCommands implements Listener, CommandExecutor {
-    Economy eco = BattlepassMain.getEconomy();
-
-    public String cmd1 = "bp";
-    private BattlepassMain plugin = BattlepassMain.getInstance();
-    static String logo = ChatColor.translateAlternateColorCodes('&', "//");
-   static String noPermissions = ChatColor.translateAlternateColorCodes('&', "&c You don't have enough permissions.");
+    static String noPermissions = ChatColor.translateAlternateColorCodes('&', "&c You don't have enough permissions.");
     static String noArguments = ChatColor.translateAlternateColorCodes('&', "&c&lNO &3 arugments have been found!");
     static String commandUsage = ChatColor.translateAlternateColorCodes('&', "&c&lUssage : &c/bp check level <player>!");
     static String staff = ChatColor.translateAlternateColorCodes('&', "&7[&6Staff&7]");
     static String tryThis = ChatColor.translateAlternateColorCodes('&', "&a&lTry! :");
-
-
+    public String cmd1 = "bp";
+    Economy eco = BattlepassMain.getEconomy();
+    private BattlepassMain plugin = BattlepassMain.getInstance();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
 
-
-
         if (sender instanceof Player) {
+            String logo = BattlepassMain.getInstance().getConfig().getString("Messages.logo");
             Player player = (Player) sender;
             PlayerLevelManager playerLevelManager = BattlepassMain.getInstance().levelManagerHashMap.get(player.getUniqueId());
 
@@ -48,7 +43,7 @@ public class AllCommands implements Listener, CommandExecutor {
                 if (args.length == 0) {
                     //Help infromation
                     player.sendMessage(noArguments);
-                    player.sendMessage(tryThis + ChatColor.GOLD + "/bp help");
+                    player.sendMessage(logo + tryThis + ChatColor.GOLD + "/bp help");
                     player.sendMessage(ChatColor.GOLD + "----------------------------");
                     player.sendMessage(ChatColor.GOLD + "Author :" + ChatColor.GREEN + " JuniorDeveloper");
                     player.sendMessage(ChatColor.GOLD + "Version :" + ChatColor.GREEN + " 1.0.4");
@@ -67,7 +62,7 @@ public class AllCommands implements Listener, CommandExecutor {
                     player.sendMessage(tryThis + ChatColor.GOLD + "/bp balance " + ChatColor.GRAY + " Checks your balance!.");
 
                     if (player.hasPermission("battlepass.Staff")) {
-                        player.sendMessage(tryThis + ChatColor.GRAY + "/bp withdraw|desposit <player> <amount>");
+                        player.sendMessage(logo + tryThis + ChatColor.GRAY + "/bp withdraw|desposit <player> <amount>");
 
                     }
                     return true;
@@ -76,22 +71,22 @@ public class AllCommands implements Listener, CommandExecutor {
 
 
                 if (args[0].equalsIgnoreCase("level")) {
-                    player.sendMessage(ChatColor.GRAY + "Your level is : " + ChatColor.GREEN + playerLevelManager.getLevel());
+                    player.sendMessage(logo + ChatColor.GRAY + "Your level is : " + ChatColor.GREEN + playerLevelManager.getLevel());
 
                 }
-                if(args[0].equalsIgnoreCase("xp")){
-                    player.sendMessage(ChatColor.GRAY + "Your xp is : " + ChatColor.GREEN + playerLevelManager.getXp());
+                if (args[0].equalsIgnoreCase("xp")) {
+                    player.sendMessage(logo + ChatColor.GRAY + "Your xp is : " + ChatColor.GREEN + playerLevelManager.getXp());
                 }
                 if (args[0].equalsIgnoreCase("challanges")) {
-                    player.sendMessage(ChatColor.GRAY + " Your challanges ! :");
-                    player.sendMessage(ChatColor.GOLD + "     Challange 1");
+                    player.sendMessage(logo + ChatColor.GRAY + " Your challanges ! :");
+                    player.sendMessage(logo + ChatColor.GOLD + "     Challange 1");
 
                 }
 
 
                 if (args[0].equalsIgnoreCase("check")) {
                     if (args.length == 1) {
-                        player.sendMessage(commandUsage);
+                        player.sendMessage(logo + commandUsage);
                         return true;
                     }
 
@@ -104,12 +99,12 @@ public class AllCommands implements Listener, CommandExecutor {
 
                         Player otherPlayerLevelCheck = Bukkit.getServer().getPlayer(args[2]);
                         if (otherPlayerLevelCheck == null) {
-                            player.sendMessage(ChatColor.RED + "Not player found!");
+                            player.sendMessage(logo + ChatColor.RED + "Not player found!");
                             return true;
 
                         } else if (otherPlayerLevelCheck != null) {
                             PlayerLevelManager playerCheckerLevel = BattlepassMain.getInstance().levelManagerHashMap.get(otherPlayerLevelCheck.getUniqueId());
-                            player.sendMessage(ChatColor.GREEN + otherPlayerLevelCheck.getName() + ChatColor.GRAY + " Level is : " + ChatColor.GREEN + playerCheckerLevel.getLevel());
+                            player.sendMessage(logo + ChatColor.GREEN + otherPlayerLevelCheck.getName() + ChatColor.GRAY + " Level is : " + ChatColor.GREEN + playerCheckerLevel.getLevel());
                         }
 
                     }
@@ -118,12 +113,12 @@ public class AllCommands implements Listener, CommandExecutor {
                 }
                 if (args[0].equalsIgnoreCase("xp")) {
                     if (args.length <= 1) {
-                        player.sendMessage(tryThis + ChatColor.RED + "/bp xp list");
+                        player.sendMessage(logo + tryThis + ChatColor.RED + "/bp xp list");
                         return true;
                     }
                     if (args[1].equalsIgnoreCase("list")) {
                         if (args.length == 2) {
-                            player.sendMessage(ChatColor.RED + "You need a page number!");
+                            player.sendMessage(logo + ChatColor.RED + "You need a page number!");
                             return true;
                         }
                         List<Integer> levels = new ArrayList<>();
@@ -147,20 +142,20 @@ public class AllCommands implements Listener, CommandExecutor {
                     Economy economy = BattlepassMain.getEconomy();
 
                     if (args.length == 0) {
-                        player.sendMessage(tryThis + ChatColor.GOLD + "/bp balance " + ChatColor.GRAY + " Checks your balance!.");
+                        player.sendMessage(logo + tryThis + ChatColor.GOLD + "/bp balance " + ChatColor.GRAY + " Checks your balance!.");
                         return true;
                     }
 
 
                     if (args.length == 1) {
-                        player.sendMessage(Text.colorize("&6") + "Your current balance is " + Text.colorize("&7 $") + economy.format(economy.getBalance(player)));
+                        player.sendMessage(logo + Text.colorize("&6") + "Your current balance is " + Text.colorize("&7 $") + economy.format(economy.getBalance(player)));
                         return true;
                     }
 
                     if (args.length == 2) {
                         Player checkOtherBalance = Bukkit.getPlayer(args[1]);
                         try {
-                            player.sendMessage(Text.colorize("&6") + checkOtherBalance.getName() +
+                            player.sendMessage(logo + Text.colorize("&6") + checkOtherBalance.getName() +
                                     Text.colorize(" §7has $") + economy.format(economy.getBalance(checkOtherBalance)) + Text.colorize(" &7 in their account"));
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -170,33 +165,32 @@ public class AllCommands implements Listener, CommandExecutor {
 
                 }
 
-                if(player.hasPermission("battlepass.Staff"))    {
-                    if(args[0].equalsIgnoreCase("withdraw"))    {
-                        if(args.length == 0){
-                            player.sendMessage(commandUsage);
+                if (player.hasPermission("battlepass.Staff")) {
+                    if (args[0].equalsIgnoreCase("withdraw")) {
+                        if (args.length == 0) {
+                            player.sendMessage(logo + commandUsage);
                             return true;
                         }
-                        if(args.length == 1)    {
-                            player.sendMessage(tryThis + Text.colorize("&a/bp withdraw &c<player> <amount> "));
+                        if (args.length == 1) {
+                            player.sendMessage(logo + tryThis + Text.colorize("&a/bp withdraw &c<player> <amount> "));
                             return true;
                         }
 
-                        if(args.length == 2){
-                            player.sendMessage(tryThis + Text.colorize("&a/bp withdraw <player> &c<amount> "));
+                        if (args.length == 2) {
+                            player.sendMessage(logo + tryThis + Text.colorize("&a/bp withdraw <player> &c<amount> "));
                             return true;
                         }
-                        if(args.length == 3){
+                        if (args.length == 3) {
 
-
-                            try{
+                            try {
                                 Player target = Bukkit.getPlayer(args[1]);
                                 double remove_amount = Double.valueOf(args[2]);
-                                deposit(target, remove_amount);
-                                player.sendMessage(Text.colorize("&7 You have succesfully removed ") + Text.colorize("&6$")  + remove_amount + Text.colorize(" &6 Dollar ")+  Text.colorize(" &7 from ") + Text.colorize(" &6") + target.getName() + Text.colorize(" &7balance!"));
+                                withdraw(target, remove_amount);
+                                player.sendMessage(logo + Text.colorize("&7 You have succesfully removed ") + Text.colorize("&6$") + remove_amount + Text.colorize(" &6 Dollar ") + Text.colorize(" &7 from ") + Text.colorize(" &6") + target.getName() + Text.colorize(" &7balance!"));
 
-                                target.sendMessage(Text.colorize("&7") + player.getName() + Text.colorize(" &7 has removed ") + Text.colorize("&6$")  + remove_amount + Text.colorize(" &6 Dollar ")+ Text.colorize("&7 from ")
+                                target.sendMessage(logo + Text.colorize("&7") + player.getName() + Text.colorize(" &7 has removed ") + Text.colorize("&6$") + remove_amount + Text.colorize(" &6 Dollar ") + Text.colorize("&7 from ")
                                         + Text.colorize("&6") + Text.colorize(" &7your balance!"));
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                             return true;
@@ -204,43 +198,43 @@ public class AllCommands implements Listener, CommandExecutor {
 
 
                     }
-                    if(args[0].equalsIgnoreCase("deposit")){
-                        if(args.length == 0){
-                            player.sendMessage(commandUsage);
+                    if (args[0].equalsIgnoreCase("deposit")) {
+                        if (args.length == 0) {
+                            player.sendMessage(logo + commandUsage);
                             return true;
                         }
-                        if(args.length == 1)    {
-                            player.sendMessage(tryThis + Text.colorize("&a/bp desposit &c<player> <amount> "));
+                        if (args.length == 1) {
+                            player.sendMessage(logo + tryThis + Text.colorize("&a/bp desposit &c<player> <amount> "));
                             return true;
                         }
 
-                        if(args.length == 2){
-                            player.sendMessage(tryThis + Text.colorize("&a/bp desposit <player> &c<amount> "));
+                        if (args.length == 2) {
+                            player.sendMessage(logo + tryThis + Text.colorize("&a/bp desposit <player> &c<amount> "));
                             return true;
                         }
-                        if(args.length == 3){
+                        if (args.length == 3) {
 
 
-                            try{
+                            try {
                                 Player target = Bukkit.getPlayer(args[1]);
                                 double add_amount = Double.valueOf(args[2]);
                                 deposit(target, add_amount);
-                                player.sendMessage(Text.colorize("&7 You have added ") + Text.colorize("&6$")  + add_amount + Text.colorize(" &6 Dollar ")+ Text.colorize("&7 to ")
+                                player.sendMessage(logo + Text.colorize("&7 You have added ") + Text.colorize("&6$") + add_amount + Text.colorize(" &6 Dollar ") + Text.colorize("&7 to ")
                                         + Text.colorize("&6") + target.getName() + Text.colorize(" &7 balance!"));
 
-                                target.sendMessage(Text.colorize("&7") + player.getName() + Text.colorize(" &7has added ") + Text.colorize("&6$")  + add_amount + Text.colorize(" &6 Dollar ")+ Text.colorize("&7 to ")
+                                target.sendMessage(logo + Text.colorize("&7") + player.getName() + Text.colorize(" &7has added ") + Text.colorize("&6$") + add_amount + Text.colorize(" &6 Dollar ") + Text.colorize("&7 to ")
                                         + Text.colorize("&6") + Text.colorize(" &7 your balance!"));
 
 
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                             return true;
                         }
 
                     }
-                }else {
-                    player.sendMessage(noPermissions);
+                } else {
+                    player.sendMessage(logo + noPermissions);
                     return true;
                 }
 
@@ -249,14 +243,12 @@ public class AllCommands implements Listener, CommandExecutor {
             }
             return true;
         }
-    return false;
+        return false;
     }
 
-    private boolean withdraw(Player player, double remove_amount)
-    {
+    private boolean withdraw(Player player, double remove_amount) {
         EconomyResponse economyResponse = BattlepassMain.getEconomy().withdrawPlayer(player, remove_amount);
         if (economyResponse.transactionSuccess()) {
-            player.sendMessage(Text.colorize("&6" + "" + Text.colorize("&7 new balance is :") + ""));
             return true;
         } else {
             player.sendMessage(Text.colorize(String.format("&cAn error occurred: %s", economyResponse.errorMessage)));
@@ -265,12 +257,9 @@ public class AllCommands implements Listener, CommandExecutor {
     }
 
 
-
-    private boolean deposit(Player player, double add_amout)
-    {
+    private boolean deposit(Player player, double add_amout) {
         EconomyResponse economyResponse = BattlepassMain.getEconomy().depositPlayer(player, add_amout);
         if (economyResponse.transactionSuccess()) {
-            player.sendMessage(Text.colorize("&6" + "" + Text.colorize("&7 new balance is :") + ""));
             return true;
         } else {
             player.sendMessage(Text.colorize(String.format("&cAn error occurred: %s", economyResponse.errorMessage)));
@@ -278,6 +267,7 @@ public class AllCommands implements Listener, CommandExecutor {
         }
 
     }
+
 
 }
 
