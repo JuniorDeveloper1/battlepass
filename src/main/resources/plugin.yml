@@ -9,11 +9,13 @@ api-version: 1.13
 permissions:
   battlepass.Staff:
     description: Permission for staff! Commands acces > balance remove|add
+  battlepass.Admin:
+    description: Admin+
 
 commands:
   bp:
     description: Check your battlepass level!
-    usage: /<command> [level|challanges|check|xp|help|balance|withdraw|deposit|xp] [level|list] [2|3|4|5]
+    usage: /<command> [level|challanges|check|xp|help|balance|withdraw|deposit|xp] [level|list|ores] [2|3|4|5|off|on]
     aliases: [battlepass, BattlePass]
 
 depend:

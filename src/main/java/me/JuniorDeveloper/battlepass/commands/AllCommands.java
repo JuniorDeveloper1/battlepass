@@ -54,6 +54,7 @@ public class AllCommands implements Listener, CommandExecutor {
 
                 if (args[0].equalsIgnoreCase("help")) {
                     player.sendMessage(noArguments);
+
                     player.sendMessage(tryThis + ChatColor.GOLD + "/bp level" + ChatColor.GRAY + " Shows your level!");
                     player.sendMessage(tryThis + ChatColor.GOLD + "/bp challanges" + ChatColor.GRAY + " Shows challanges!");
                     player.sendMessage(tryThis + ChatColor.GOLD + "/bp check level <player>" + ChatColor.GRAY + " Checks someone's player level!");
@@ -63,11 +64,19 @@ public class AllCommands implements Listener, CommandExecutor {
 
                     if (player.hasPermission("battlepass.Staff")) {
                         player.sendMessage(logo + tryThis + ChatColor.GRAY + "/bp withdraw|desposit <player> <amount>");
-
+                        player.sendMessage(tryThis + ChatColor.GOLD + "/bp reload" + ChatColor.GRAY + " Reloads the plugin");
                     }
                     return true;
 
                 }
+
+                    if(args[0].equalsIgnoreCase("reload")){
+                        if(player.hasPermission("battlepass.Admin")){
+                        plugin.reloadConfig();
+                    }
+                    return true;
+                }
+
 
 
                 if (args[0].equalsIgnoreCase("level")) {
@@ -78,9 +87,33 @@ public class AllCommands implements Listener, CommandExecutor {
                     player.sendMessage(logo + ChatColor.GRAY + "Your xp is : " + ChatColor.GREEN + playerLevelManager.getXp());
                 }
                 if (args[0].equalsIgnoreCase("challanges")) {
-                    player.sendMessage(logo + ChatColor.GRAY + " Your challanges ! :");
-                    player.sendMessage(logo + ChatColor.GOLD + "     Challange 1");
+                if(args.length == 1){
+                    player.sendMessage("Challanges");
+                    return true;
+                }
+                    if (args[1].equalsIgnoreCase("ores")) {
+                        if(args.length == 2){
+                            return true;
+                        }
+                        if (args[2].equalsIgnoreCase("on")) {
 
+                            if (args.length == 3){
+                                player.sendMessage(ChatColor.GREEN + "true");
+                                plugin.getConfig().set("Settings.ore-xp-On_Off", true);
+                                plugin.reloadConfig();
+                                return true;
+                            }
+
+                        }
+                        if (args[2].equalsIgnoreCase("off")) {
+                            if (args.length == 3){
+                                player.sendMessage(ChatColor.RED + "false");
+                                plugin.getConfig().set("Settings.ore-xp-On_Off", false);
+                                plugin.reloadConfig();
+                                return true;
+                            }
+                        }
+                    }
                 }
 
 
@@ -93,7 +126,7 @@ public class AllCommands implements Listener, CommandExecutor {
 
                     if (args[1].equalsIgnoreCase("level")) {
                         if (args.length == 2) {
-                            player.sendMessage(commandUsage);
+                            player.sendMessage(logo + commandUsage);
                             return true;
                         }
 

@@ -22,6 +22,7 @@ public class BattlepassMain extends JavaPlugin {
     public static HashMap<UUID, Integer> redstone_ore;
     public static HashMap<UUID, Integer> gold_ore;
     public static HashMap<UUID, Integer> iron_ore;
+    public static HashMap<Integer, Integer> checker;
 
     public static BattlepassMain instance;
     private static Economy economy = null;
@@ -34,16 +35,21 @@ public class BattlepassMain extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        instance = this;
         if (!setupEconomy()) {
             System.out.println("Disabled due to no Vault dependency found!");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
         hashmaps();
-        instance = this;
+
         this.getConfig().options().copyDefaults(true);
         this.saveConfig();
         this.reloadConfig();
+        BattlepassMain.getInstance().getConfig().getConfigurationSection("Levels").getKeys(false).forEach(level -> {
+            int xp = BattlepassMain.getInstance().getConfig().getInt("levels." + level + ".xp" );
+            BattlepassMain.checker.put(Integer.parseInt(level), xp);
+        });
         getCommand(commands.cmd1).setExecutor(commands);
         //Level System
         getServer().getPluginManager().registerEvents(new AllCommands(), this);
@@ -53,6 +59,7 @@ public class BattlepassMain extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new challangeListeners(), this);
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Battlepass is fully enabled!");
         configMessages();
+
 
     }
 
@@ -66,13 +73,14 @@ public class BattlepassMain extends JavaPlugin {
 
     public void hashmaps() {
         this.levelManagerHashMap = new HashMap<>();
-        this.coal_ore = new HashMap<UUID, Integer>();
-        this.diamond_ore = new HashMap<UUID, Integer>();
-        this.emerald_ore = new HashMap<UUID, Integer>();
-        this.lapis_ore = new HashMap<UUID, Integer>();
-        this.redstone_ore = new HashMap<UUID, Integer>();
-        this.gold_ore = new HashMap<UUID, Integer>();
-        this.iron_ore = new HashMap<UUID, Integer>();
+        this.coal_ore = new HashMap<>();
+        this.diamond_ore = new HashMap<>();
+        this.emerald_ore = new HashMap<>();
+        this.lapis_ore = new HashMap<>();
+        this.redstone_ore = new HashMap<>();
+        this.gold_ore = new HashMap<>();
+        this.iron_ore = new HashMap<>();
+        checker = new HashMap<>();
     }
 
     public void configMessages(){

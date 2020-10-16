@@ -1,8 +1,8 @@
 package me.JuniorDeveloper.battlepass.challanges;
 
 import me.JuniorDeveloper.battlepass.BattlepassMain;
-import me.JuniorDeveloper.battlepass.helper.Text;
 import me.JuniorDeveloper.battlepass.level.PlayerLevelManager;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -38,41 +38,44 @@ public class challangeListeners implements Listener {
         if (onOffOres == true) {
             if (block.getType() == Material.COAL_ORE) {
                 playerLevelManager.setXp(playerLevelManager.getXp() + coalOreAmount);
-                player.sendMessage(logo + Text.colorize("&7You mined coal_ore! You have gained") + Text.colorize(" &6 ") + coalOreAmount + "Xp!");
+                player.sendMessage(logo + color("&7You mined coal_ore! You have gained") + color(" &6 ") + coalOreAmount + "Xp!");
             }
             if (block.getType().equals(Material.DIAMOND_ORE)) {
-                player.sendMessage(logo + Text.colorize("&7You mined diamond_ore! You have gained") + Text.colorize(" &6 ") + diamondOreAmount + "Xp!");
+                player.sendMessage(logo + color("&7You mined diamond_ore! You have gained") + color(" &6 ") + diamondOreAmount + "Xp!");
                 playerLevelManager.setXp(playerLevelManager.getXp() + diamondOreAmount);
             }
 
             if (block.getType().equals(Material.REDSTONE_ORE)) {
-                player.sendMessage(logo + Text.colorize("&7You mined redstone_ore! You have gained") + Text.colorize(" &6 ") + redstoneOreAmount + "Xp!");
+                player.sendMessage(logo + color("&7You mined redstone_ore! You have gained") + color(" &6 ") + redstoneOreAmount + "Xp!");
                 playerLevelManager.setXp(playerLevelManager.getXp() + redstoneOreAmount);
             }
 
             if (block.getType().equals(Material.EMERALD_ORE)) {
-                player.sendMessage(logo + Text.colorize("&7You mined emerald_ore! You have gained") + Text.colorize(" &6 ") + emeraldOreAmount + "Xp!");
+                player.sendMessage(logo + color("&7You mined emerald_ore! You have gained") + color(" &6 ") + emeraldOreAmount + "Xp!");
                 playerLevelManager.setXp(playerLevelManager.getXp() + emeraldOreAmount);
             }
 
             if (block.getType().equals(Material.GOLD_ORE)) {
-                player.sendMessage(logo + Text.colorize("&7You mined gold_ore! You have gained") + Text.colorize(" &6 ") + goldOreAmount + "Xp!");
+                player.sendMessage(logo + color("&7You mined gold_ore! You have gained") + color(" &6 ") + goldOreAmount + "Xp!");
                 playerLevelManager.setXp(playerLevelManager.getXp() + goldOreAmount);
             }
 
             if (block.getType().equals(Material.IRON_ORE)) {
-                player.sendMessage(logo + Text.colorize("&7You mined iron_ore! You have gained") + Text.colorize(" &6 ") + ironOreAmount + "Xp!");
+                player.sendMessage(logo + color("&7You mined iron_ore! You have gained") + color(" &6 ") + ironOreAmount + "Xp!");
                 playerLevelManager.setXp(playerLevelManager.getXp() + ironOreAmount);
             }
 
             if (block.getType().equals(Material.LAPIS_ORE)) {
-                player.sendMessage(logo + Text.colorize("&7You mined lapis_ore! You have gained") + Text.colorize(" &6 ") + lapisOreAmount + "Xp!");
+                player.sendMessage(logo + color("&7You mined lapis_ore! You have gained") + color(" &6 ") + lapisOreAmount + "Xp!");
                 playerLevelManager.setXp(playerLevelManager.getXp() + lapisOreAmount);
             }
             xpcheck(player, playerLevelManager);
             //All Ores
         } else {
         }
+    }
+    private String color(String s) {
+        return ChatColor.translateAlternateColorCodes('&', s);
     }
 
 }

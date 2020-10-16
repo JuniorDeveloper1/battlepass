@@ -4,9 +4,10 @@ PlayerLevels:
   //Hey!! Thank you for having this plugin. But we need to make somethings sure... If you change something in the config make sure for too restart.
   // You can also reload, BUT you need to make sure EVERYONE relogs. Otherwise the plugin will not work!
 Settings:
-  ore-xp-On_Off : true
+  ore-xp-On_Off: true
 Messages:
   logo: '§6[§7BP§6] '
+
 
 
 BlockAmount:
