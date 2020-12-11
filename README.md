@@ -33,7 +33,7 @@ Author : JuniorDeveloper.
 
 If you have any troubles with the plugin or any updates,
 
-feel free to message me on discord. Yess#0781. **You can ask for private updates**
+feel free to message me on discord. Yess#0631. **You can ask for private updates**
 
 
 ### Important > Vault.
